@@ -8,7 +8,8 @@ namespace Magazzino
     {
         const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=Magazzino;Trusted_Connection=True;";
 
-        static DataSet dsMagazzino = new DataSet();
+       static DataSet dsMagazzino = new DataSet();
+       
 
         public static void ElencoProdotti()
         {
@@ -81,6 +82,44 @@ namespace Magazzino
                 Console.Clear();
                 Console.WriteLine("===== INSERIMENTO NUOVO PRODOTTO =====");
 
+                #region trycatch da rivedere (non funzionante)
+                //    try
+                //    {
+                //        Console.WriteLine("Codice Prodotto:");
+                //        string codice = Console.ReadLine();
+                //        Console.WriteLine("Categoria:");
+                //        string categoria = Console.ReadLine();
+                //        Console.WriteLine("Descrizione:");
+                //        string descrizione = Console.ReadLine();
+                //        Console.WriteLine("Prezzo Unitario:");
+                //        decimal prezzo = Helpers.CheckDecimal();
+                //        Console.WriteLine("Quantità Disponibile:");
+                //        int qta = Helpers.CheckInt();
+
+                //        newRow["CodiceProdotto"] = codice;
+                //        newRow["Categoria"] = categoria;
+                //        newRow["Descrizione"] = descrizione;
+                //        newRow["PrezzoUnitario"] = prezzo;
+                //        newRow["QuantitaDisponibile"] = qta;
+
+                //        dsMagazzino.Tables["Magazzino"].Rows.Add(newRow);
+
+
+                //        magazzinoAdapter.Update(dsMagazzino, "Magazzino");
+                //    }
+                //    catch (SqlException errore)
+                //    {
+                //        if (errore.Number == 2627)
+                //        {
+                //            Console.WriteLine("Codice Prodotto già presente. Non è stato possibile inserire il prodotto.");
+                //            Console.WriteLine();
+                //            Console.WriteLine("Premi un tasto per tornare al Pannello di Controllo");
+                //            Console.ReadLine();
+                //        }
+                //    }
+                //}
+                #endregion
+
 
                 Console.WriteLine("Codice Prodotto:");
                 string codice = Console.ReadLine();
@@ -134,20 +173,7 @@ namespace Magazzino
 
                 Console.Clear();
                 Console.WriteLine("===== ELIMINAZIONE PRODOTTO =====");
-
-                Console.WriteLine("==== ELENCO PRODOTTI ====");
-                Console.WriteLine("{0,-5}{1,-15}{2,-20}{3,-20}", "ID", "Cod.Prod.", "Categoria", "Descrizione");
-                Console.WriteLine(new String('-', 60));
-                foreach (DataRow row in dsMagazzino.Tables["Magazzino"].Rows)
-                {
-                    Console.WriteLine("{0,-5}{1,-15}{2,-20}{3,-20}",
-                                  row["ID"],
-                                  row["CodiceProdotto"],
-                                  row["Categoria"],
-                                  row["Descrizione"]);
-                }
-                Console.WriteLine(new String('-', 60));
-
+                StampaElencoProdotti();
                 Console.WriteLine("Inserisci ID del Prodotto da Eliminare: ");
                 string id = Console.ReadLine();
 
